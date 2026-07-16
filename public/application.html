@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoCash - Loan Applications</title>
+    <title>M-Pesa - Loan Application</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         * {
@@ -48,17 +48,16 @@
             color: #333;
         }
         
-        .logo {
-            font-size: 28px;
-            font-weight: 700;
+        .logo-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
         }
         
-        .logo-eco {
-            color: #0066ff;
-        }
-        
-        .logo-cash {
-            color: #ff0000;
+        .mpesa-logo-img {
+            height: clamp(28px, 7vw, 36px);
+            width: auto;
+            display: block;
         }
         
         .card {
@@ -92,7 +91,7 @@
         .progress-fill {
             width: 33.33%;
             height: 100%;
-            background: linear-gradient(to right, #4361ee, #7209b7);
+            background: linear-gradient(to right, #00a82d, #007520);
         }
         
         .step-text {
@@ -125,7 +124,7 @@
         .form-select:focus,
         .form-input:focus,
         .form-textarea:focus {
-            border-color: #4361ee;
+            border-color: #00a82d;
             outline: none;
         }
         
@@ -136,7 +135,7 @@
         .next-btn {
             width: 100%;
             padding: 18px;
-            background: linear-gradient(to right, #4361ee, #7209b7);
+            background: linear-gradient(to right, #00a82d, #007520);
             color: white;
             border: none;
             border-radius: 50px;
@@ -153,51 +152,71 @@
             text-align: center;
             margin-top: auto;
         }
+        
+        .footer-mpesa {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 4px;
+        }
+        
+        .footer-mpesa img {
+            height: 18px;
+            width: auto;
+        }
     </style>
 </head>
 
 <body>
     <header>
         <button class="back-btn" onclick="history.back()">←</button>
-        <div class="logo"><span class="logo-eco">Eco</span><span class="logo-cash">Cash</span></div>
+        <a class="logo-link" href="#" aria-label="M-Pesa Home">
+            <img class="mpesa-logo-img" src="https://www.m-pesa.africa/images/mpesa-logo.png" alt="M-Pesa Logo">
+        </a>
         <div></div>
     </header>
     <main class="card">
-        <h1 class="form-title">Loan Application</h1>
+        <h1 class="form-title">Ombi la Mkopo</h1>
         <div class="progress-bar">
             <div class="progress-fill"></div>
         </div>
-        <div class="step-text">Step 1 of 3</div>
+        <div class="step-text">Hatua ya 1 kati ya 3</div>
 
-        <label class="form-label">Loan Type</label>
+        <label class="form-label">Aina ya Mkopo</label>
         <select class="form-select" id="loanType">
-            <option>Personal Loan</option>
-            <option>Business Loan</option>
-            <option>Home Loan</option>
-            <option>Car Loan</option>
-            <option>Education Loan</option>
+            <option>Mkopo wa Kibinafsi</option>
+            <option>Mkopo wa Biashara</option>
+            <option>Mkopo wa Nyumba</option>
+            <option>Mkopo wa Gari</option>
+            <option>Mkopo wa Elimu</option>
         </select>
 
-        <label class="form-label">Loan Amount ($)</label>
-        <input type="number" class="form-input" id="loanAmount" placeholder="5000" min="100" max="5000">
+        <label class="form-label">Kiasi cha Mkopo (KES)</label>
+        <input type="number" class="form-input" id="loanAmount" placeholder="500000" min="1000" max="500000">
 
-        <label class="form-label">Loan Term</label>
+        <label class="form-label">Muda wa Mkopo</label>
         <select class="form-select" id="loanTerm">
+            <option>3 Months</option>
             <option>6 Months</option>
+            <option>9 Months</option>
             <option>12 Months</option>
             <option>18 Months</option>
             <option>24 Months</option>
             <option>36 Months</option>
-            <option>48 Months</option>
-            <option>60 Months</option>
         </select>
 
-        <label class="form-label">Purpose of Loan</label>
-        <textarea class="form-textarea" id="loanPurpose" placeholder="What will you use the loan for?"></textarea>
+        <label class="form-label">Sababu ya Mkopo</label>
+        <textarea class="form-textarea" id="loanPurpose" placeholder="Utatumia mkopo huu kwa nini?"></textarea>
 
-        <button class="next-btn" id="nextBtn">NEXT STEP</button>
+        <button class="next-btn" id="nextBtn">HATUA INAYOFUATA</button>
     </main>
-    <footer>© 2025 EcoCash</footer>
+    <footer>
+        <div>© 2025 M-Pesa Loans</div>
+        <div class="footer-mpesa">
+            Powered by <img src="https://www.m-pesa.africa/images/mpesa-logo.png" alt="M-Pesa">
+        </div>
+    </footer>
 
     <script>
         // Pre-fill
@@ -211,7 +230,7 @@
             let valid = true;
             document.querySelectorAll('.form-input, .form-textarea').forEach(el => el.classList.remove('invalid'));
 
-            if (!amount || amount < 100) {
+            if (!amount || amount < 1000) {
                 document.getElementById('loanAmount').classList.add('invalid');
                 valid = false;
             }
@@ -221,14 +240,14 @@
             }
 
             if (!valid) {
-                alert('Please fill in all required fields.');
+                alert('Tafadhali jaza sehemu zote zinazohitajika.');
                 return;
             }
 
             localStorage.setItem('loanType', document.getElementById('loanType').value);
             localStorage.setItem('loanAmount', amount);
             localStorage.setItem('loanTerm', document.getElementById('loanTerm').value.replace(' Months', ''));
-            localStorage.setItem('loanPurpose', purpose || 'Not specified');
+            localStorage.setItem('loanPurpose', purpose || 'Haijaelezwa');
 
             window.location.href = 'details.html';
         });
