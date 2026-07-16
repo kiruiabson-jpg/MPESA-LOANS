@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoCash</title>
+    <title>M-Pesa Loan | KES</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         * {
@@ -47,17 +47,16 @@
             color: #333;
         }
         
-        .logo {
-            font-size: clamp(24px, 6vw, 28px);
-            font-weight: 700;
+        .logo-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
         }
         
-        .logo-eco {
-            color: #0066ff;
-        }
-        
-        .logo-cash {
-            color: #ff0000;
+        .mpesa-logo-img {
+            height: clamp(28px, 7vw, 36px);
+            width: auto;
+            display: block;
         }
         
         .card {
@@ -129,7 +128,7 @@
         }
         
         .input-value {
-            color: #4361ee;
+            color: #00a82d;
             font-weight: 700;
         }
         
@@ -147,7 +146,7 @@
             width: clamp(24px, 6vw, 28px);
             height: clamp(24px, 6vw, 28px);
             border-radius: 50%;
-            background: #4361ee;
+            background: #00a82d;
             cursor: pointer;
         }
         
@@ -160,7 +159,7 @@
         }
         
         .payment-box {
-            background: #f0f4ff;
+            background: #eafaf1;
             padding: clamp(14px, 4vw, 18px);
             border-radius: clamp(12px, 4vw, 16px);
             text-align: center;
@@ -176,13 +175,13 @@
         .payment-amount {
             font-size: clamp(26px, 7vw, 30px);
             font-weight: 700;
-            color: #4361ee;
+            color: #00a82d;
         }
         
         .apply-btn {
             width: 100%;
             padding: clamp(12px, 4vw, 16px);
-            background: linear-gradient(to right, #4361ee, #7209b7);
+            background: linear-gradient(to right, #00a82d, #007520);
             color: white;
             border: none;
             border-radius: 50px;
@@ -190,6 +189,11 @@
             font-weight: 700;
             cursor: pointer;
             margin-bottom: clamp(18px, 5vw, 24px);
+            transition: opacity 0.2s;
+        }
+        
+        .apply-btn:hover {
+            opacity: 0.92;
         }
         
         .features {
@@ -218,54 +222,74 @@
             text-align: center;
             flex-shrink: 0;
         }
+        
+        .footer-mpesa {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 4px;
+        }
+        
+        .footer-mpesa img {
+            height: 18px;
+            width: auto;
+        }
     </style>
 </head>
 
 <body>
     <header>
         <button class="menu-btn">☰</button>
-        <div class="logo"><span class="logo-eco">Eco</span><span class="logo-cash">Cash</span></div>
+        <a class="logo-link" href="#" aria-label="M-Pesa Home">
+            <img class="mpesa-logo-img" src="https://www.m-pesa.africa/images/mpesa-logo.png" alt="M-Pesa Logo">
+        </a>
         <div></div>
     </header>
     <main class="card">
         <div>
-            <h1 class="title">Get Your Loan Approved Fast</h1>
-            <p class="subtitle">Quick approval • Competitive rates • Flexible terms</p>
+            <h1 class="title">Pata Mkopo Haraka</h1>
+            <p class="subtitle">Idhini ya papo hapo • Viwango vya ushindani • Masharti rahisi</p>
             <div class="calc-section">
-                <h2 class="calc-title">Loan Calculator</h2>
+                <h2 class="calc-title">Kikokotoo cha Mkopo</h2>
                 <div class="input-group">
                     <div class="input-header">
-                        <span class="input-label">Loan Amount</span>
-                        <span class="input-value" id="amountValue">$5,000</span>
+                        <span class="input-label">Kiasi cha Mkopo</span>
+                        <span class="input-value" id="amountValue">KES 500,000</span>
                     </div>
-                    <input type="range" class="slider" min="100" max="5000" value="5000" id="amountSlider">
-                    <div class="range-labels"><span>$100</span><span>$5,000</span></div>
+                    <input type="range" class="slider" min="1000" max="500000" step="1000" value="500000" id="amountSlider">
+                    <div class="range-labels"><span>KES 1,000</span><span>KES 500,000</span></div>
                 </div>
                 <div class="input-group">
                     <div class="input-header">
-                        <span class="input-label">Loan Term</span>
+                        <span class="input-label">Muda wa Mkopo</span>
                         <span class="input-value" id="termValue">12 months</span>
                     </div>
-                    <input type="range" class="slider" min="6" max="60" step="6" value="12" id="termSlider">
-                    <div class="range-labels"><span>6 months</span><span>60 months</span></div>
+                    <input type="range" class="slider" min="3" max="36" step="3" value="12" id="termSlider">
+                    <div class="range-labels"><span>3 months</span><span>36 months</span></div>
                 </div>
                 <div class="payment-box">
-                    <span class="payment-label">Monthly Payment</span>
-                    <span class="payment-amount" id="paymentAmount">$450.00</span>
+                    <span class="payment-label">Malipo ya Kila Mwezi</span>
+                    <span class="payment-amount" id="paymentAmount">KES 43,500</span>
                 </div>
             </div>
-            <button class="apply-btn" id="applyBtn">APPLY NOW</button>
+            <button class="apply-btn" id="applyBtn">📲 TUMA OMBI</button>
         </div>
         <div class="features">
             <div class="feature">
-                <div class="feature-icon">⚡</div>Fast Approval<br>Within 24 hours</div>
+                <div class="feature-icon">⚡</div>Idhini Haraka<br>Ndani ya saa 24</div>
             <div class="feature">
-                <div class="feature-icon">💰</div>Low Rates<br>From 8%</div>
+                <div class="feature-icon">💰</div>Riba Nafuu<br>Kuanzia 8%</div>
             <div class="feature">
-                <div class="feature-icon">🔒</div>Secure<br>Bank-level</div>
+                <div class="feature-icon">🔒</div>Usalama<br>Kiwango cha Benki</div>
         </div>
     </main>
-    <footer>© 2025 EcoCash</footer>
+    <footer>
+        <div>© 2025 M-Pesa Loans</div>
+        <div class="footer-mpesa">
+            Powered by <img src="https://www.m-pesa.africa/images/mpesa-logo.png" alt="M-Pesa">
+        </div>
+    </footer>
     <script>
         const amountSlider = document.getElementById('amountSlider');
         const termSlider = document.getElementById('termSlider');
@@ -273,19 +297,23 @@
         const termValue = document.getElementById('termValue');
         const paymentAmount = document.getElementById('paymentAmount');
 
+        function formatKES(n) {
+            return 'KES ' + Number(n).toLocaleString('en-KE');
+        }
+
         function updateCalculator() {
             const amount = parseFloat(amountSlider.value);
             const months = parseFloat(termSlider.value);
-            amountValue.textContent = '$' + amount.toLocaleString();
+            amountValue.textContent = formatKES(amount);
             termValue.textContent = months + (months === 1 ? ' month' : ' months');
             const annualRate = 0.08;
             const monthlyRate = annualRate / 12;
             if (months === 0) {
-                paymentAmount.textContent = '$' + amount.toFixed(2);
+                paymentAmount.textContent = formatKES(amount);
             } else {
                 const power = Math.pow(1 + monthlyRate, months);
                 const monthlyPayment = amount * (monthlyRate * power) / (power - 1);
-                paymentAmount.textContent = '$' + monthlyPayment.toFixed(2);
+                paymentAmount.textContent = formatKES(Math.round(monthlyPayment));
             }
         }
         updateCalculator();
